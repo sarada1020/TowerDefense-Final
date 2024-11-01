@@ -14,4 +14,27 @@ public abstract class TorreBase : MonoBehaviour
     protected Transform target;
     private float timeUntilFire;
 
+    private void Update()
+    {
+        if (target == null)
+        {
+            FindTarget();
+            return;
+        }
+        if (!CheckTargetIsInRange())
+        {
+            target = null;
+        }
+        else
+        {
+            timeUntilFire += Time.deltaTime;
+
+            if (timeUntilFire >= 1f / bps)
+            {
+                Shoot();
+                timeUntilFire = 0f;
+            }
+        }
+    }
+
 }
