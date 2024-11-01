@@ -49,5 +49,14 @@ public abstract class TorreBase : MonoBehaviour
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
+    protected virtual void FindTarget()
+    {
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, Vector2.zero, 0f, enemyMask);
+
+        if (hits.Length > 0)
+        {
+            target = hits[0].transform;
+        }
+    }
 
 }
