@@ -59,4 +59,9 @@ public abstract class TorreBase : MonoBehaviour
         }
     }
 
+    public void OnDrawGizmosSelected()
+    {
+        Handles.color = Color.blue;
+        Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
+    }
 }
