@@ -61,4 +61,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void EnemyDestroyed()
+    {
+        inimigosVivos--; // Decrementa o número de inimigos vivos
+    }
+
+    void SpawnarInimigo()
+    {
+        // Escolhe um prefab aleatório da lista
+        int randomIndex = Random.Range(0, prefabInimigo.Count); // Gera um índice aleatório
+        GameObject prefabParaSpawnar = prefabInimigo[randomIndex]; // Obtém o prefab correspondente ao índice aleatório
+        GameObject novoInimigo = Instantiate(prefabParaSpawnar, pontoInicial.position, Quaternion.identity); // Instancia um novo inimigo
+        inimigosAtivos.Add(novoInimigo); // Adiciona o novo inimigo à lista de inimigos ativos
+    }
+
+    IEnumerator IniciarOnda()
+    {
+        yield return new WaitForSeconds(tempoEntreOndas); // Espera o tempo entre ondas
+        isSpawning = true; // Ativa o estado de spawn
+        inimigosRestantesParaSpawn = CalcularInimigosPorOnda(); // Calcula quantos inimigos spawnar
+    }
+
+    int CalcularInimigosPorOnda()
+    {
+        return Mathf.RoundToInt(inimigosBase * Mathf.Pow(ondaAtual, dificuldadeEscalonamento)); // Calcula o número de inimigos na onda atual
+    }
+
+    void TerminarOnda()
+    {
+        isSpawning = false; // Desativa o estado de spawn
+        tempoDesdeUltimoSpawn = 0f; // Reseta o tempo desde o último spawn
+        ondaAtual++; // Incrementa a onda atual
+        StartCoroutine(IniciarOnda()); // Inicia a próxima onda
+    }
+
+
 }
