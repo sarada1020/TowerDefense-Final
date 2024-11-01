@@ -30,5 +30,35 @@ public class GameManager : MonoBehaviour
     public static UnityEvent onEnemyDestroy = new UnityEvent(); // Evento acionado ao destruir um inimigo
     private List<GameObject> inimigosAtivos = new List<GameObject>(); // Lista para armazenar inimigos ativos
 
-    
+    private void Awake()
+    {
+        main = this; // Inicializa a instância única
+        onEnemyDestroy.AddListener(EnemyDestroyed); // Adiciona listener ao evento de destruição de inimigo
+    }
+
+    private void Start()
+    {
+        StartCoroutine(IniciarOnda()); // Inicia a primeira onda de inimigos
+    }
+
+    private void Update()
+    {
+        if (!isSpawning) return; // Retorna se não estiver spawnando
+
+        tempoDesdeUltimoSpawn += Time.deltaTime; // Atualiza o tempo desde o último spawn
+
+        if (tempoDesdeUltimoSpawn >= (1f / inimigosPorSegundo) && inimigosRestantesParaSpawn > 0)
+        {
+            SpawnarInimigo(); // Spawn um novo inimigo
+            inimigosRestantesParaSpawn--; // Reduz a quantidade de inimigos restantes para spawnar
+            inimigosVivos++; // Incrementa o número de inimigos vivos
+            tempoDesdeUltimoSpawn = 0f; // Reseta o tempo desde o último spawn
+        }
+
+        if (inimigosVivos == 0 && inimigosRestantesParaSpawn == 0)
+        {
+            TerminarOnda(); // Termina a onda se não houver inimigos vivos
+        }
+    }
+
 }
