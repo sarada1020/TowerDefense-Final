@@ -63,5 +63,21 @@ public class InimigoBase : MonoBehaviour, IReceberDano
         }
     }
 
+    // Método para alterar a velocidade do inimigo
+    public void SetSpeed(float newSpeed)
+    {
+        speed = Mathf.Max(0, newSpeed);
+        Debug.Log("Velocidade do inimigo alterada para: " + speed); // Verifique se a velocidade é alterada
+        if (rigidbody != null)
+        {
+            Vector2 direcao = (target.position - transform.position).normalized;
+            rigidbody.velocity = direcao * speed;
+        }
+    }
 
+    // Método para obter a velocidade atual do inimigo
+    public float GetSpeed()
+    {
+        return speed;
+    }
 }
