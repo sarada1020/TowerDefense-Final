@@ -37,4 +37,17 @@ public abstract class TorreBase : MonoBehaviour
         }
     }
 
+    protected virtual void Shoot()
+    {
+        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
+        Tiro bulletScript = bulletObj.GetComponent<Tiro>();
+        bulletScript.SetTarget(target);
+    }
+
+    protected bool CheckTargetIsInRange()
+    {
+        return Vector2.Distance(target.position, transform.position) <= targetingRange;
+    }
+
+
 }
