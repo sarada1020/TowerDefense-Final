@@ -40,4 +40,28 @@ public class InimigoBase : MonoBehaviour, IReceberDano
         }
     }
 
+    public virtual void FixedUpdate()
+    {
+        if (target != null) // Verifica se o target está definido
+        {
+            Vector2 direcao = (target.position - transform.position).normalized;
+            rigidbody.velocity = direcao * speed;
+        }
+    }
+
+    public virtual void TakeDamage(int damage)
+    {
+        hitPoints -= damage;
+
+        if (hitPoints <= 0)
+        {
+            GameManager.onEnemyDestroy.Invoke();
+            GameManager.main.AumentarMoeda(currencyWorth);
+            // Remove o inimigo da lista de inimigos ativos
+            GameManager.main.RemoveEnemyFromList(gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+
 }
