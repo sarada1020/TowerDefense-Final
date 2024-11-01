@@ -95,5 +95,27 @@ public class GameManager : MonoBehaviour
         StartCoroutine(IniciarOnda()); // Inicia a próxima onda
     }
 
+    public void AumentarMoeda(int quantia)
+    {
+        currency += quantia; // Aumenta a quantidade de moedas
+    }
 
+    public bool GastarMoeda(int quantia)
+    {
+        if (quantia <= currency) // Verifica se há moedas suficientes
+        {
+            currency -= quantia; // Deduz a quantia de moedas
+            return true; // Retorna verdadeiro se a compra foi bem-sucedida
+        }
+        else
+        {
+            Debug.Log("Você não tem moedas suficientes para essa compra."); // Log de erro se não houver moedas suficientes
+            return false; // Retorna falso se a compra não foi bem-sucedida
+        }
+    }
+
+    public void RemoveEnemyFromList(GameObject enemy)
+    {
+        inimigosAtivos.Remove(enemy); // Remove o inimigo da lista de inimigos ativos
+    }
 }
