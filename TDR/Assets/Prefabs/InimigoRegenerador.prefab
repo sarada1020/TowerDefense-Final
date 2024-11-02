@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5601463771598812928}
   - component: {fileID: 6592844680887919242}
-  - component: {fileID: -8312943507842284730}
+  - component: {fileID: 6043491198654041391}
+  - component: {fileID: 3230392672753544863}
+  - component: {fileID: 7340131450457803531}
   - component: {fileID: 2421809035700988088}
-  - component: {fileID: 4536641199991449540}
   - component: {fileID: 6949619901101746916}
-  - component: {fileID: 9069541860318649659}
   m_Layer: 3
   m_Name: InimigoRegenerador
   m_TagString: Untagged
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-8312943507842284730
+--- !u!114 &6043491198654041391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,13 +98,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 9164686584666528560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91d08dfb1302d46459a91316d8732e32, type: 3}
+  m_Script: {fileID: 11500000, guid: a0f2b52a9edda864f8c396fcf7da1941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
   hitPoints: 4
-  currencyWorth: 50
-  regenerationRate: 1
+  currencyWorth: 150
+  regenerationRate: 2
+--- !u!114 &3230392672753544863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164686584666528560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9925dd5360c2643ac30ba3a1ca55aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pontosDeVida: 4
+  valorEmMoeda: 150
+--- !u!114 &7340131450457803531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164686584666528560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af8a73efd40e5f42bed971516314977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  hitPoints: 4
+  currencyWorth: 150
 --- !u!58 &2421809035700988088
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -140,21 +169,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4536641199991449540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9164686584666528560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 835688ca3b7242c4eaccc7d9f671f443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  hitPoints: 2
-  currencyWorth: 50
 --- !u!50 &6949619901101746916
 Rigidbody2D:
   serializedVersion: 4
@@ -182,17 +196,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &9069541860318649659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9164686584666528560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a69e93264845d4d99d3e34eeb4aa99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPoints: 3
-  currencyWorth: 150

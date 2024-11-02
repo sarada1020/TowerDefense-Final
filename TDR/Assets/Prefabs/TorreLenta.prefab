@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3688737733467199620}
   - component: {fileID: 2488482308336149087}
-  - component: {fileID: 4242272092993315417}
+  - component: {fileID: 9219754437900054994}
   m_Layer: 6
   m_Name: TorreLenta
   m_TagString: Untagged
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2065054071
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0.009225845, a: 1}
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4242272092993315417
+--- !u!114 &9219754437900054994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,16 +126,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5338176725351844700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f957b7c781fa974b81f1f21e3ff75b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a0d3cb823fc80841b7faeacb575a183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingRange: 5
+  targetingRange: 1.5
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
   bulletPrefab: {fileID: 769051407390993077, guid: d2365eaed6fb82947836710480a014a1, type: 3}
   firingPoint: {fileID: 2285420300376706879}
   bps: 1
-  slowAmount: 0.5
-  slowRadius: 3
+  slowAmount: 0.6
+  slowRadius: 1.5
   slowDuration: 2

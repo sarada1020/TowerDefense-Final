@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3688737733467199620}
   - component: {fileID: 2488482308336149087}
-  - component: {fileID: -1557866340794526323}
+  - component: {fileID: 6410504943642306004}
   m_Layer: 6
   m_Name: Torre
   m_TagString: Untagged
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2065054071
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.18444705, g: 1, b: 0, a: 1}
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-1557866340794526323
+--- !u!114 &6410504943642306004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,10 +126,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5338176725351844700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ca1d4fed122ef4ca613351b2fd3a07, type: 3}
+  m_Script: {fileID: 11500000, guid: 96951f8e15e5ac2468b398d721a005ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingRange: 3
+  targetingRange: 1.5
   enemyMask:
     serializedVersion: 2
     m_Bits: 8

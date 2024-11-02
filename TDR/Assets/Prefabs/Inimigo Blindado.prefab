@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5601463771598812928}
   - component: {fileID: 6592844680887919242}
   - component: {fileID: 2421809035700988088}
-  - component: {fileID: 4536641199991449540}
-  - component: {fileID: 2255228127921240638}
+  - component: {fileID: 2953846071502125698}
   - component: {fileID: 6949619901101746916}
-  - component: {fileID: 9069541860318649659}
+  - component: {fileID: 8541424933874201542}
+  - component: {fileID: 5350608411272206560}
   m_Layer: 3
   m_Name: Inimigo Blindado
   m_TagString: Untagged
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4536641199991449540
+--- !u!114 &2953846071502125698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,27 +133,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 9164686584666528560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 835688ca3b7242c4eaccc7d9f671f443, type: 3}
+  m_Script: {fileID: 11500000, guid: 2af8a73efd40e5f42bed971516314977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  hitPoints: 2
-  currencyWorth: 50
---- !u!114 &2255228127921240638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9164686584666528560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b93a6580e1fa3241a40bf8d47c28aff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
-  hitPoints: 4
-  currencyWorth: 50
+  hitPoints: 6
+  currencyWorth: 100
 --- !u!50 &6949619901101746916
 Rigidbody2D:
   serializedVersion: 4
@@ -181,7 +166,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &9069541860318649659
+--- !u!114 &8541424933874201542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,8 +175,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 9164686584666528560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a69e93264845d4d99d3e34eeb4aa99, type: 3}
+  m_Script: {fileID: 11500000, guid: ba9925dd5360c2643ac30ba3a1ca55aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 5
-  currencyWorth: 100
+  pontosDeVida: 2
+  valorEmMoeda: 50
+--- !u!114 &5350608411272206560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164686584666528560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde55086d2df2084cab02b0f17a346d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  hitPoints: 2
+  currencyWorth: 50
