@@ -10,7 +10,6 @@ public class InimigoBase : MonoBehaviour, IReceberDano
     protected Rigidbody2D rigidbody;
     protected Transform target;
     protected int pontoIndex = 0;
-    private MovimentoInimigo movimentoInimigo;
 
     public virtual void Start()
     {
