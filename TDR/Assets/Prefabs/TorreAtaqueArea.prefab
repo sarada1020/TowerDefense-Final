@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3688737733467199620}
   - component: {fileID: 2488482308336149087}
-  - component: {fileID: 7289572548204987512}
+  - component: {fileID: 2931175290207691496}
   m_Layer: 6
   m_Name: TorreAtaqueArea
   m_TagString: Untagged
@@ -103,8 +103,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2065054071
-  m_SortingLayer: 0
+  m_SortingLayerID: 198839509
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.2391901, b: 1, a: 1}
@@ -117,7 +117,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7289572548204987512
+--- !u!114 &2931175290207691496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e31af618fa0594a8ba131cd36af00f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetingRange: 2
+  targetingRange: 5
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
@@ -137,4 +137,4 @@ MonoBehaviour:
   firingPoint: {fileID: 2285420300376706879}
   bps: 1
   fireBulletPrefab: {fileID: 769051407390993077, guid: 7489dd14adde1ac4a9112fe27b5953db, type: 3}
-  attackRadius: 2
+  attackRadius: 3

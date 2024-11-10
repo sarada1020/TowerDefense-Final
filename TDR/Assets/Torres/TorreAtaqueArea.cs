@@ -20,12 +20,4 @@ public class TorreAtaqueArea : TorreBase
             bulletScript.SetTarget(enemy.transform);
         }
     }
-
-    // Adiciona Gizmos para visualizar a área de ataque
-    private void OnDrawGizmosSelected()
-    {
-        base.OnDrawGizmosSelected(); // Chama o método base para desenhar o alcance da torre
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(firingPoint.position, attackRadius); // Desenha o raio de ataque
-    }
 }

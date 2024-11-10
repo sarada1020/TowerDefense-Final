@@ -16,11 +16,4 @@ public class TorreNormal : TorreBase
             bulletScript.SetTarget(target); // Define o alvo do projétil
         }
     }
-
-    // Se desejar adicionar Gizmos específicos para a TorreNormal, você pode implementar aqui
-    private void OnDrawGizmosSelected()
-    {
-        base.OnDrawGizmosSelected(); // Chama o método base para desenhar o alcance da torre
-        // Você pode adicionar outros Gizmos aqui, se necessário
-    }
 }

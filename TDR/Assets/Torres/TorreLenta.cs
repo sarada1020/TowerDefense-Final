@@ -53,12 +53,4 @@ public class TorreLenta : TorreBase
         enemiesInSlowZone.Remove(enemy); // Remove do conjunto de inimigos desacelerados
     }
 
-
-    // Adiciona Gizmos para visualizar a área de desaceleração
-    private void OnDrawGizmosSelected()
-    {
-        base.OnDrawGizmosSelected(); // Chama o método base para desenhar o alcance da torre
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, slowRadius); // Desenha o raio de desaceleração
-    }
 }
