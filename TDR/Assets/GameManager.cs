@@ -5,117 +5,128 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager main; // Instância única do GerenciadorJogo
+    public static GameManager main;
 
     [Header("Configurações de Spawn de Inimigos")]
-    [SerializeField] List<GameObject> prefabInimigo; // Lista de prefabs de inimigos
-    [SerializeField] int inimigosBase = 8; // Número base de inimigos por onda
-    [SerializeField] float inimigosPorSegundo = 0.5f; // Taxa de spawn de inimigos
-    [SerializeField] float tempoEntreOndas = 5f; // Tempo entre ondas de inimigos
-    [SerializeField] float dificuldadeEscalonamento = 0.75f; // Escalonamento da dificuldade
+    [SerializeField] List<GameObject> prefabInimigo;
+    [SerializeField] int inimigosBase = 8;
+    [SerializeField] float inimigosPorSegundo = 0.5f;
+    [SerializeField] float tempoEntreOndas = 5f;
+    [SerializeField] float dificuldadeEscalonamento = 0.75f;
 
     [Header("Configurações de Pontos")]
-    public Transform pontoInicial; // Ponto de spawn inicial dos inimigos
-    public Transform[] pontos; // Array de pontos de spawn
+    public Transform pontoInicial;
+    public Transform[] pontos;
 
     [Header("Configurações de Moeda")]
-    public int currency = 100; // Quantidade inicial de moedas
+    public int currency = 100;
 
-    int ondaAtual = 1; // Onda atual de inimigos
-    float tempoDesdeUltimoSpawn; // Tempo desde o último spawn de inimigos
-    int inimigosVivos; // Número de inimigos vivos
-    int inimigosRestantesParaSpawn; // Inimigos restantes para spawnar
-    bool isSpawning = false; // Estado do spawn
+    int ondaAtual = 1;
+    float tempoDesdeUltimoSpawn;
+    int inimigosVivos;
+    int inimigosRestantesParaSpawn;
+    bool isSpawning = false;
 
-    public static UnityEvent onEnemyDestroy = new UnityEvent(); // Evento acionado ao destruir um inimigo
-    private List<GameObject> inimigosAtivos = new List<GameObject>(); // Lista para armazenar inimigos ativos
+    private bool interstitialPodePular = true;
+
+    public static UnityEvent onEnemyDestroy = new UnityEvent();
+    private List<GameObject> inimigosAtivos = new List<GameObject>();
 
     private void Awake()
     {
-        main = this; // Inicializa a instância única
-        onEnemyDestroy.AddListener(EnemyDestroyed); // Adiciona listener ao evento de destruição de inimigo
+        main = this;
+        onEnemyDestroy.AddListener(EnemyDestroyed);
     }
 
     private void Start()
     {
-        StartCoroutine(IniciarOnda()); // Inicia a primeira onda de inimigos
+        StartCoroutine(IniciarOnda());
     }
 
     private void Update()
     {
-        if (!isSpawning) return; // Retorna se não estiver spawnando
+        if (!isSpawning) return;
 
-        tempoDesdeUltimoSpawn += Time.deltaTime; // Atualiza o tempo desde o último spawn
+        tempoDesdeUltimoSpawn += Time.deltaTime;
 
         if (tempoDesdeUltimoSpawn >= (1f / inimigosPorSegundo) && inimigosRestantesParaSpawn > 0)
         {
-            SpawnarInimigo(); // Spawn um novo inimigo
-            inimigosRestantesParaSpawn--; // Reduz a quantidade de inimigos restantes para spawnar
-            inimigosVivos++; // Incrementa o número de inimigos vivos
-            tempoDesdeUltimoSpawn = 0f; // Reseta o tempo desde o último spawn
+            SpawnarInimigo();
+            inimigosRestantesParaSpawn--;
+            inimigosVivos++;
+            tempoDesdeUltimoSpawn = 0f;
         }
 
         if (inimigosVivos == 0 && inimigosRestantesParaSpawn == 0)
         {
-            TerminarOnda(); // Termina a onda se não houver inimigos vivos
+            TerminarOnda();
         }
     }
 
     private void EnemyDestroyed()
     {
-        inimigosVivos--; // Decrementa o número de inimigos vivos
+        inimigosVivos--;
     }
 
     void SpawnarInimigo()
     {
-        // Escolhe um prefab aleatório da lista
-        int randomIndex = Random.Range(0, prefabInimigo.Count); // Gera um índice aleatório
-        GameObject prefabParaSpawnar = prefabInimigo[randomIndex]; // Obtém o prefab correspondente ao índice aleatório
-        GameObject novoInimigo = Instantiate(prefabParaSpawnar, pontoInicial.position, Quaternion.identity); // Instancia um novo inimigo
-        inimigosAtivos.Add(novoInimigo); // Adiciona o novo inimigo à lista de inimigos ativos
+        int randomIndex = Random.Range(0, prefabInimigo.Count);
+        GameObject prefabParaSpawnar = prefabInimigo[randomIndex];
+        GameObject novoInimigo = Instantiate(prefabParaSpawnar, pontoInicial.position, Quaternion.identity);
+        inimigosAtivos.Add(novoInimigo);
     }
 
     IEnumerator IniciarOnda()
     {
-        yield return new WaitForSeconds(tempoEntreOndas); // Espera o tempo entre ondas
-        isSpawning = true; // Ativa o estado de spawn
-        inimigosRestantesParaSpawn = CalcularInimigosPorOnda(); // Calcula quantos inimigos spawnar
+        yield return new WaitForSeconds(tempoEntreOndas);
+
+        AdsManager.main.Interstitial(interstitialPodePular);
+
+        while (AdsManager.main.exibindoIntersticial)
+        {
+            yield return null;
+        }
+
+        interstitialPodePular = !interstitialPodePular;
+
+        isSpawning = true;
+        inimigosRestantesParaSpawn = CalcularInimigosPorOnda();
     }
 
     int CalcularInimigosPorOnda()
     {
-        return Mathf.RoundToInt(inimigosBase * Mathf.Pow(ondaAtual, dificuldadeEscalonamento)); // Calcula o número de inimigos na onda atual
+        return Mathf.RoundToInt(inimigosBase * Mathf.Pow(ondaAtual, dificuldadeEscalonamento));
     }
 
     void TerminarOnda()
     {
-        isSpawning = false; // Desativa o estado de spawn
-        tempoDesdeUltimoSpawn = 0f; // Reseta o tempo desde o último spawn
-        ondaAtual++; // Incrementa a onda atual
-        StartCoroutine(IniciarOnda()); // Inicia a próxima onda
+        isSpawning = false;
+        tempoDesdeUltimoSpawn = 0f;
+        ondaAtual++;
+        StartCoroutine(IniciarOnda());
     }
 
     public void AumentarMoeda(int quantia)
     {
-        currency += quantia; // Aumenta a quantidade de moedas
+        currency += quantia;
     }
 
     public bool GastarMoeda(int quantia)
     {
-        if (quantia <= currency) // Verifica se há moedas suficientes
+        if (quantia <= currency)
         {
-            currency -= quantia; // Deduz a quantia de moedas
-            return true; // Retorna verdadeiro se a compra foi bem-sucedida
+            currency -= quantia;
+            return true;
         }
         else
         {
-            Debug.Log("Você não tem moedas suficientes para essa compra."); // Log de erro se não houver moedas suficientes
-            return false; // Retorna falso se a compra não foi bem-sucedida
+            Debug.Log("Você não tem moedas suficientes para essa compra.");
+            return false;
         }
     }
 
     public void RemoveEnemyFromList(GameObject enemy)
     {
-        inimigosAtivos.Remove(enemy); // Remove o inimigo da lista de inimigos ativos
+        inimigosAtivos.Remove(enemy);
     }
 }

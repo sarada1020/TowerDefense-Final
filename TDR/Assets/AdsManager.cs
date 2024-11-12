@@ -5,15 +5,19 @@ using static UnityEngine.Advertisements.Advertisement;
 
 public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsShowListener
 {
+    public static AdsManager main;
     float timer;
     bool bannerVisivel;
-    bool visivelGeral;
+    public bool exibindoIntersticial = false;
 
+    private void Awake()
+    {
+        main = this;
+    }
     private void Start()
     {
         timer = 10f;
         bannerVisivel = true;
-        visivelGeral = false;
         Advertisement.Initialize("5729657", true, this);
         Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
         Advertisement.Banner.Show("Banner_Android");
@@ -23,39 +27,54 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener, IUnity
     {
         timer -= Time.deltaTime;
 
-        if (bannerVisivel && timer <= 0)
+        if (bannerVisivel && timer <= 0 && !exibindoIntersticial)
         {
             Advertisement.Banner.Hide();
             bannerVisivel = false;
             timer = 5f;
         }
-        else if (!bannerVisivel && timer <= 0)
+        else if (!bannerVisivel && timer <= 0 && !exibindoIntersticial)
         {
-            Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
             Advertisement.Banner.Show("Banner_Android");
             bannerVisivel = true;
             timer = 10f;
         }
     }
-    public void Interstitial()
+    public void Interstitial(bool podePular)
     {
-        Advertisement.Show("Interstitial_Android", this);
+        if (podePular)
+        {
+            Advertisement.Show("IntersentialPulavel", this);
+            Advertisement.Banner.Hide();
+            bannerVisivel = false;
+
+        }
+        else
+        {
+            Advertisement.Show("IntercentialNaoPulavel", this);
+            Advertisement.Banner.Hide();
+            bannerVisivel = false;
+
+        }
+        exibindoIntersticial = true;
     }
+
+
     public void Recompensa()
     {
         Advertisement.Show("Anuncio_Reward", this);
     }
+
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
     {
         if (placementId == "Anuncio_Reward" && showCompletionState == UnityAdsShowCompletionState.COMPLETED)
         {
             Debug.Log("Player earned reward!");
-            
+            // Processa a recompensa aqui
         }
-        else if (showCompletionState == UnityAdsShowCompletionState.SKIPPED)
+        else if (placementId == "IntersentialPulavel" || placementId == "IntercentialNaoPulavel")
         {
-            Debug.Log("Player skipped the ad.");
-            
+            exibindoIntersticial = false;
         }
     }
 
